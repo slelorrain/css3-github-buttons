@@ -7,7 +7,7 @@
 
 /* Variables */
 
-$url_icons: '../gh-icons.png';
+$url_icons: 'gh-icons.png';
 
 /* Normal */
 $color: #333;
@@ -90,6 +90,7 @@ $background_minor_active: $background_active;
         background-color: $background_hover;
         background-image: -webkit-gradient(linear, 0 0, 0 100%, from($color_stop_hover_1), to($color_stop_hover_2));
         background-image: -moz-linear-gradient($color_stop_hover_1, $color_stop_hover_2);
+        background-image: -ms-linear-gradient($color_stop_hover_1, $color_stop_hover_2);
         background-image: -o-linear-gradient($color_stop_hover_1, $color_stop_hover_2);
         background-image: linear-gradient($color_stop_hover_1, $color_stop_hover_2);
     }
