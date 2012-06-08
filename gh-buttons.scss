@@ -51,6 +51,25 @@ $background_minor: $shadow;
 $background_minor_hover: $color_stop_hover_1;
 $background_minor_active: $background_active;
 
+/* Mixins */
+
+@mixin border_and_gradient($border, $border_bt, $background, $color_stop_1, $color_stop_2) {
+    border-color: $border;
+    border-bottom-color: $border_bt;
+    background-color: $background;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from($color_stop_1), to($color_stop_2));
+    background-image: -moz-linear-gradient($color_stop_1, $color_stop_2);
+    background-image: -ms-linear-gradient($color_stop_1, $color_stop_2);
+    background-image: -o-linear-gradient($color_stop_1, $color_stop_2);
+    background-image: linear-gradient($color_stop_1, $color_stop_2);
+}
+
+@mixin text_button_selected {
+    color: $color_hover;
+    text-shadow: -1px -1px 0 rgba(0,0,0,0.3);
+    text-decoration: none;
+}
+
 /* Base Button */
 
 .button {
@@ -68,12 +87,7 @@ $background_minor_active: $background_active;
     white-space: nowrap;
     cursor: pointer;
     outline: none;
-    background-color: $background;
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from($color_stop_1), to($color_stop_2));
-    background-image: -moz-linear-gradient($color_stop_1, $color_stop_2);
-    background-image: -ms-linear-gradient($color_stop_1, $color_stop_2);
-    background-image: -o-linear-gradient($color_stop_1, $color_stop_2);
-    background-image: linear-gradient($color_stop_1, $color_stop_2);
+    @include border_and_gradient($border, $border, $background, $color_stop_1, $color_stop_2);
     -moz-background-clip: padding; /* for Firefox 3.6 */
     background-clip: padding-box;
     border-radius: 0.2em;
@@ -81,29 +95,14 @@ $background_minor_active: $background_active;
     zoom: 1;
     *display: inline;
 
-    &:hover, &:focus, &:active, &.active {
-        border-color: $border_hover;
-        border-bottom-color: $border_bt_hover;
-        text-decoration: none;
-        text-shadow: -1px -1px 0 rgba(0,0,0,0.3);
-        color: $color_hover;
-        background-color: $background_hover;
-        background-image: -webkit-gradient(linear, 0 0, 0 100%, from($color_stop_hover_1), to($color_stop_hover_2));
-        background-image: -moz-linear-gradient($color_stop_hover_1, $color_stop_hover_2);
-        background-image: -ms-linear-gradient($color_stop_hover_1, $color_stop_hover_2);
-        background-image: -o-linear-gradient($color_stop_hover_1, $color_stop_hover_2);
-        background-image: linear-gradient($color_stop_hover_1, $color_stop_hover_2);
+    &:hover, &:focus {
+        @include text_button_selected;
+        @include border_and_gradient($border_hover, $border_bt_hover, $background_hover, $color_stop_hover_1, $color_stop_hover_2);
     }
 
     &:active, &.active {
-        border-color: $border_active;
-        border-bottom-color: $border_bt_active;
-        background-color: $background_active;
-        background-image: -webkit-gradient(linear, 0 0, 0 100%, from($color_stop_active_1), to($color_stop_active_2));
-        background-image: -moz-linear-gradient($color_stop_active_1, $color_stop_active_2);
-        background-image: -ms-linear-gradient($color_stop_active_1, $color_stop_active_2);
-        background-image: -o-linear-gradient($color_stop_active_1, $color_stop_active_2);
-        background-image: linear-gradient($color_stop_active_1, $color_stop_active_2);
+        @include text_button_selected;
+        @include border_and_gradient($border_active, $border_bt_active, $background_active, $color_stop_active_1, $color_stop_active_2);
     }
 
     /* overrides extra padding on button elements in Firefox */
@@ -262,26 +261,12 @@ $background_minor_active: $background_active;
         color: $color_danger;
 
         &:hover, &:focus, &:active {
-            border-color: $border_danger_hover;
-            border-bottom-color: $border_bt_danger_hover;
             color: $color_danger_hover;
-            background-color: $background_danger_hover;
-            background-image: -webkit-gradient(linear, 0 0, 0 100%, from($color_stop_danger_hover_1), to($color_stop_danger_hover_2));
-            background-image: -moz-linear-gradient($color_stop_danger_hover_1, $color_stop_danger_hover_2);
-            background-image: -ms-linear-gradient($color_stop_danger_hover_1, $color_stop_danger_hover_2);
-            background-image: -o-linear-gradient($color_stop_danger_hover_1, $color_stop_danger_hover_2);
-            background-image: linear-gradient($color_stop_danger_hover_1, $color_stop_danger_hover_2);
+            @include border_and_gradient($border_danger_hover, $border_bt_danger_hover, $background_danger_hover, $color_stop_danger_hover_1, $color_stop_danger_hover_2);
         }
 
         &:active, &.active {
-            border-color: $border_danger_active;
-            border-bottom-color: $border_bt_danger_active;
-            background-color: $background_danger_active;
-            background-image: -webkit-gradient(linear, 0 0, 0 100%, from($color_stop_danger_active_1), to($color_stop_danger_active_2));
-            background-image: -moz-linear-gradient($color_stop_danger_active_1, $color_stop_danger_active_2);
-            background-image: -ms-linear-gradient($color_stop_danger_active_1, $color_stop_danger_active_2);
-            background-image: -o-linear-gradient($color_stop_danger_active_1, $color_stop_danger_active_2);
-            background-image: linear-gradient($color_stop_danger_active_1, $color_stop_danger_active_2);
+            @include border_and_gradient($border_danger_active, $border_bt_danger_active, $background_danger_active, $color_stop_danger_active_1, $color_stop_danger_active_2);
         }
     }
 
